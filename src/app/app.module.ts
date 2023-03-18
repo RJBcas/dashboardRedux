@@ -3,10 +3,28 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegistreComponent } from './auth/registre/registre.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { IngresoEgresoComponent } from './ingreso-egreso/ingreso-egreso.component';
+import { EstadisticasComponent } from './ingreso-egreso/estadisticas/estadisticas.component';
+import { DetalleComponent } from './ingreso-egreso/detalle/detalle.component';
+import { FooterComponent } from './share/footer/footer.component';
+import { NavbarComponent } from './share/navbar/navbar.component';
+import { SidebarComponent } from './share/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RegistreComponent,
+    DashboardComponent,
+    IngresoEgresoComponent,
+    EstadisticasComponent,
+    DetalleComponent,
+    FooterComponent,
+    NavbarComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
