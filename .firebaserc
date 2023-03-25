@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ingresoegresoapp-c38cf": {
+      "hosting": {
+        "ingresoEgresoApp": [
+          "ingresoegresoapp-c38cf"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ingresoegresoapp-c38cf"
+  }
+}

@@ -20,21 +20,21 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link">
+      <a class="nav-link cursor">
         <i class="menu-icon fa fa-tachometer-alt"></i>
         <span class="menu-title" routerLink="/dashboard">Dashboard</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link">
+      <a class="nav-link cursor">
         <i class="menu-icon fa fa-clipboard-list"></i>
         <span class="menu-title" routerLink="/dashboard/ingreso-egresos">Ingresos y Egresos</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link">
+      <a class="nav-link cursor">
         <i class="menu-icon fa fa-table"></i>
         <span class="menu-title" routerLink="/dashboard/detalle">Detalle</span>
       </a>
@@ -43,7 +43,7 @@
     <li class="nav-item">
       <a class="nav-link cursor">
         <i class="menu-icon fa fa-sign-out-alt"></i>
-        <span class="menu-title" routerLink="/login">Cerrar sesión</span>
+        <span class="menu-title" (click)="cerrarSesion()">Cerrar sesión</span>
       </a>
     </li>
 
