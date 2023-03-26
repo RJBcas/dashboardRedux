@@ -1,18 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/NgrxGlobal/app.reducer';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2'
+import { Subscription } from 'rxjs'
+import * as uiActions from '../../share/NgRxjs/ui.actions'
+
+
 @Component({
   selector: 'app-registre',
   templateUrl: './registre.component.html',
   styleUrls: ['./registre.component.css']
 })
-export class RegistreComponent implements OnInit {
+export class RegistreComponent implements OnInit, OnDestroy {
 
   registroForm: FormGroup;
+  cargando: boolean = false;
+  uiSubscription$: Subscription
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private rout: Router) {
+  constructor(private fb: FormBuilder, private auth: AuthService, private rout: Router, private store: Store<AppState>) {
     this.registroForm = this.fb.group(
       {
         nombre: ['', Validators.required],
@@ -22,20 +30,23 @@ export class RegistreComponent implements OnInit {
       }
     )
 
+    this.uiSubscription$ = Subscription.EMPTY;
   }
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-
+    this.uiSubscription$ = this.store.select('ui').subscribe(ui => this.cargando = ui.isLoading)
   }
   crearUsuario() {
-    Swal.fire({
-      title: 'Espere por favor',
-      didOpen: () => {
-        Swal.showLoading()
-      },
-    })
-    console.log(this.registroForm.value)
+
+    this.store.dispatch(uiActions.isLoading())
+    /*     Swal.fire({
+          title: 'Espere por favor',
+          didOpen: () => {
+            Swal.showLoading()
+          },
+        }) */
+    /* console.log(this.registroForm.value) */
     const { nombre, correo, password } = this.registroForm.value
     this.auth.crearUsuario(nombre, correo, password).then(
 
@@ -57,10 +68,14 @@ export class RegistreComponent implements OnInit {
           title: 'Signed in successfully'
         })
         console.warn(credenciales)
+        this.store.dispatch(uiActions.stopLoadin())
+
         this.rout.navigate(['/dashboard'])
       }
     ).catch(err => {
       console.log(err)
+      this.store.dispatch(uiActions.stopLoadin())
+
       Swal.hideLoading()
       Swal.fire({
         icon: 'error',
@@ -70,4 +85,11 @@ export class RegistreComponent implements OnInit {
     })
 
   }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.uiSubscription$.unsubscribe()
+  }
+
 }

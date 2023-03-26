@@ -10,11 +10,7 @@ export class AppComponent {
   title = 'ingresoEgresoApp';
 
   constructor(private auth: AuthService) {
-    this.auth.initAuthListener().subscribe(initAuth => {
-      console.log(initAuth?.uid)
-      console.log(initAuth?.email)
-
-    })
+    this.auth.initAuthListener();
 
   }
 

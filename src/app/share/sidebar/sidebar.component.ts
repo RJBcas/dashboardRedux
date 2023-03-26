@@ -15,6 +15,7 @@ export class SidebarComponent {
 
   cerrarSesion() {
     this.auth.closeSesion().then(signOut => {
+      console.log(signOut)
       this.rout.navigate(['/login']);
     })
   }
