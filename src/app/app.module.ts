@@ -21,6 +21,8 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './NgrxGlobal/app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { OrderPipe } from './services/pipes/order.pipe';
+import { NgChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +34,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     DetalleComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    OrderPipe
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
       trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
     }),
+    NgChartsModule
 
 
   ],
